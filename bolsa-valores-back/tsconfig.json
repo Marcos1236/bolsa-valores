@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",                      // Usa una versión moderna de JavaScript
+    "module": "commonjs",                     // Utiliza el sistema de módulos CommonJS
+    "strict": true,                           // Habilita todas las comprobaciones estrictas de TypeScript
+    "esModuleInterop": true,                  // Habilita la interoperabilidad de módulos ES y CommonJS
+    "skipLibCheck": true,                     // Ignora las comprobaciones de tipos en los archivos de definición de bibliotecas
+    "forceConsistentCasingInFileNames": true, // Fuerza el uso consistente de mayúsculas/minúsculas
+    "outDir": "./dist",                       // Directorio de salida para los archivos compilados
+    "rootDir": "./src",                       // Directorio donde estarán tus archivos TypeScript
+    "resolveJsonModule": true,                 // Permite importar archivos JSON
+    "typeRoots": ["./node_modules/@types"],
+  "types": ["node", "express"]
+
+  },
+  "include": [
+    "src/**/*.ts"  // Incluye todos los archivos .ts en la carpeta src
+  ],
+  "exclude": [
+    "node_modules" // Excluye la carpeta node_modules
+  ]
+}
