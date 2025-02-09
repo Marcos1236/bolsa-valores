@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -21,20 +20,23 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
 body {
   margin: 0;
-  display: block; /* Cambiar de flex a block o grid */
+  display: block;
   min-width: 320px;
-  min-height: 100vh; /* Esto asegura que al menos ocupe la altura de la pantalla */
+  min-height: 100vh;
+  background-color: #121212; /* Fondo oscuro general */
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: #ffffff;
 }
 
 button {
@@ -44,16 +46,40 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #333333; /* Fondo oscuro para los botones */
+  color: #fff; /* Texto blanco */
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.3s ease;
 }
+
 button:hover {
-  border-color: #646cff;
+  background-color: #646cff; /* Fondo azul al pasar el ratón */
+  color: #ffffff; /* Mantener el texto blanco */
+  border-color: #535bf2;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+button.suscribe-button {
+  background-color: #646cff; /* Fondo azul para el botón de suscripción */
+  color: #ffffff; /* Texto blanco */
+  border: 1px solid #535bf2; /* Borde azul */
+}
+
+button.suscribe-button:hover {
+  background-color: #535bf2; /* Fondo azul más oscuro al pasar el ratón */
+  color: #ffffff; /* Texto blanco al pasar el ratón */
+  border-color: #4444e1; /* Borde más claro */
+}
+
+/* Estado predeterminado */
+button.suscribe-button {
+  background-color: #646cff !important;
+  color: #ffffff !important;
+  border: 1px solid #535bf2 !important;
 }
 
 @media (prefers-color-scheme: light) {
@@ -61,9 +87,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
