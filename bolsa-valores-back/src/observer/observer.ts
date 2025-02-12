@@ -1,5 +1,5 @@
 interface Observer {
-    update(): void;
+    update(symbol: string): void;
     equals(other: Observer) : boolean;
 }
 

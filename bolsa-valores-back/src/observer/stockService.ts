@@ -59,7 +59,7 @@ class StockService implements Subject {
             const symbolObservers = this.observers.get(symbol);
             if (symbolObservers) {
                 symbolObservers.forEach(observer => {
-                    observer.update();
+                    observer.update(symbol);
                 });
             }
         }
@@ -74,7 +74,17 @@ class StockService implements Subject {
         return true;
     }
 
-    getStocks(): { [symbol: string]: { price: number } } {
+    /**
+     * Si se pasa un símbolo, se retorna el objeto { symbol, price } correspondiente.
+     * Si no se pasa ningún símbolo, se retorna todo el conjunto de stocks.
+     */
+    getStock(): { [symbol: string]: { price: number } };
+    getStock(symbol: string): { symbol: string; price: number } | undefined;
+    getStock(symbol?: string): any {
+        if (symbol) {
+        const data = this.stockData[symbol];
+        return data ? { symbol, price: data.price } : undefined;
+        }
         return this.stockData;
     }
 }

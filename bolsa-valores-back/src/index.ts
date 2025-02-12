@@ -3,18 +3,16 @@ import http from 'http';
 import cors from 'cors';
 import { Server, Socket } from 'socket.io';
 import { StockService } from './observer/stockService';
-import { ObserverImpl } from './observer/observerImpl';  // Asegúrate de importar correctamente tus clases
+import { ObserverImpl } from './observer/observerImpl';  
 
 const app = express();
 const server = http.createServer(app);
 
-// Interfaz para el cuerpo de la solicitud de actualización de stock
 interface StockRequestBody {
     symbol: string;
     price: number;
 }
 
-// Middleware para parsear el cuerpo de las solicitudes en formato JSON
 app.use(express.json());
 
 // Configuración de CORS
@@ -38,13 +36,12 @@ const io = new Server(server, {
 // Instancia del servicio de stocks
 const stockService = new StockService();
 
-// Conexión de WebSocket
+
 io.on('connection', (socket: Socket) => {
     socket.emit('welcome', { message: 'Welcome to the stock server!' });
 
-    // Evento para suscribirse a una acción
     socket.on('subscribe', (stockSymbol: string) => {
-        const observer = new ObserverImpl(socket, stockService); // Creamos un observador
+        const observer = new ObserverImpl(socket, stockService); 
         const subscribed = stockService.attach(stockSymbol, observer); 
         if(subscribed) {
             socket.emit('subscribe-allowed')
@@ -52,13 +49,11 @@ io.on('connection', (socket: Socket) => {
     });
 });
 
-// Endpoint para obtener las acciones disponibles
 app.get('/stocks', async (req: Request, res: Response) => {
-    const availableStocks = stockService.getStocks();
+    const availableStocks = stockService.getStock();
     res.json(availableStocks);
 });
 
-// Endpoint para actualizar el precio de una acción
 app.post('/update-stock', (req: Request<{}, {}, StockRequestBody>, res: Response) => {
     const { symbol, price } = req.body;
 
@@ -76,5 +71,4 @@ app.post('/update-stock', (req: Request<{}, {}, StockRequestBody>, res: Response
     }
 });
 
-// Iniciar el servidor
 server.listen(3000, () => console.log('Server running on port 3000'));

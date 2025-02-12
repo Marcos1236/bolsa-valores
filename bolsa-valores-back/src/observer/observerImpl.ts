@@ -9,13 +9,11 @@ class ObserverImpl implements Observer {
       this.subject = subject;
     }
   
-    update(): void {
-        const data = this.subject.getStocks();
-        const formattedData = Object.entries(data).map(([symbol, details]) => ({
-            symbol,
-            price: details.price
-        }));
-        this.socket.emit('update', formattedData);
+    update(symbol: string): void {
+        const data = this.subject.getStock(symbol);
+        if(data) {
+            this.socket.emit('update', data);
+        }
     }
 
     equals(other: ObserverImpl): boolean {
