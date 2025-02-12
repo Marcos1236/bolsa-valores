@@ -37,11 +37,11 @@ export default function StockNotifier({ navigateToUpdate }) {
     useEffect(() => {
         const handleUpdate = (data) => {
             setSubscribedStocks((prevStocks) =>
-                prevStocks.map((stock) => {
-                    const updatedStock = data.find((item) => item.symbol === stock.symbol);
-                    return updatedStock ? { ...stock, price: updatedStock.price } : stock;
-                })
+                prevStocks.map((stock) =>
+                    stock.symbol === data.symbol ? { ...stock, price: data.price } : stock
+                )
             );
+            
         };
 
         socket.on('update', handleUpdate);
