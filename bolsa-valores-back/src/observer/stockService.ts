@@ -87,6 +87,12 @@ class StockService implements Subject {
         }
         return this.stockData;
     }
+
+    removeObserver(obs: Observer): void {
+        this.observers.forEach((observers, symbol) => {
+            this.observers.set(symbol, observers.filter(observer => !observer.equals(obs)));
+        });
+    }
 }
 
 export {StockService};

@@ -47,6 +47,11 @@ io.on('connection', (socket: Socket) => {
             socket.emit('subscribe-allowed')
         }       
     });
+
+    socket.on('disconnect', () => {
+        const observer = new ObserverImpl(socket, stockService);
+        stockService.removeObserver(observer);
+    });
 });
 
 app.get('/stocks', async (req: Request, res: Response) => {
